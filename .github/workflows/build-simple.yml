@@ -44,7 +44,7 @@ jobs:
             --icon ./app.iconset/icon_256x256.png \
             --width 1200 \
             --height 800 \
-            --targets deb
+            --targets darwin
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
