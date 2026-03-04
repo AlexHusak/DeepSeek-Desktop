@@ -55,12 +55,24 @@ jobs:
             *.deb
             *.AppImage
             
-      - name: Upload macOS app
+      - name: Find and upload macOS app
+        run: |
+          echo "Searching for built app..."
+          find . -name "*.app" -type d
+          find . -name "*.dmg" -type f
+          find . -name "*.tar.gz" -type f
+          find . -name "DeepSeek*" -type f
+        continue-on-error: true
+
+      - name: Upload any found artifacts
         uses: actions/upload-artifact@v4
         with:
           name: DeepSeek-macOS
           path: |
-            src-tauri/target/release/bundle/macos/*.app
-            src-tauri/target/release/bundle/dmg/*.dmg
+            **/*.app
+            **/*.dmg
+            **/*.tar.gz
+            **/DeepSeek*
             *.app
             *.dmg
+            *.tar.gz
