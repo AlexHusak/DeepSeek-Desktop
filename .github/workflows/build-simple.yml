@@ -64,6 +64,19 @@ jobs:
           find . -name "DeepSeek*" -type f
         continue-on-error: true
 
+      - name: Debug - find built app
+        run: |
+          echo "=== Current directory ==="
+          pwd
+          echo "=== Directory structure ==="
+          find . -type d | head -20
+          echo "=== Looking for app files ==="
+          find . -name "*.app" -o -name "*.dmg" -o -name "*.tar.gz" -o -name "*DeepSeek*" 2>/dev/null
+          echo "=== Checking common Tauri paths ==="
+          ls -la src-tauri/target/release/ 2>/dev/null || echo "No release dir"
+          ls -la src-tauri/target/release/bundle/ 2>/dev/null || echo "No bundle dir"
+          ls -la src-tauri/target/release/bundle/macos/ 2>/dev/null || echo "No macos dir"  
+
       - name: Upload any found artifacts
         uses: actions/upload-artifact@v4
         with:
