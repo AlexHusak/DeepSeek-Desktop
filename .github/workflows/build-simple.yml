@@ -54,3 +54,13 @@ jobs:
             dist/
             *.deb
             *.AppImage
+            
+      - name: Upload macOS app
+        uses: actions/upload-artifact@v4
+        with:
+          name: DeepSeek-macOS
+          path: |
+            src-tauri/target/release/bundle/macos/*.app
+            src-tauri/target/release/bundle/dmg/*.dmg
+            *.app
+            *.dmg
